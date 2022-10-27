@@ -1,0 +1,78 @@
+#服务配置
+server:
+  port: 9091
+#spring配置
+spring:
+  #1.应用配置
+  profiles:
+    # 本地运行使用dev，打包时使用test
+        active: dev
+#    active: test
+  application:
+    name: carbon-gate #指定服务名
+
+#配置路由规则
+zuul:
+  host:
+    connect-timeout-millis: 60000  #HTTP连接超时要比Hystrix的大
+    socket-timeout-millis: 60000  #socket超时
+  routes:
+    #路由id
+    authCenter: #认证中心
+      path: /authCenter/** #配置请求URL的请求规则
+      serviceId: carbon-auth #指定Eureka注册中心中的服务id
+      stripPrefix: false
+      sentiviteHeaders:   #将指定路由的敏感头设置为空
+      customSensitiveHeaders: true #对指定路由开启自定义敏感头
+    system: #系统
+      path: /system/**
+      serviceId: carbon-system
+      stripPrefix: false
+      sentiviteHeaders:
+      customSensitiveHeaders: true
+    assets: #资产
+      path: /assets/**
+      serviceId: carbon-assets
+      stripPrefix: false
+      sentiviteHeaders:
+      customSensitiveHeaders: true
+    trade: #交易
+      path: /trade/**
+      serviceId: carbon-trade
+      stripPrefix: false
+      sentiviteHeaders:
+      customSensitiveHeaders: true
+
+
+# 设置 feign 超时时间
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 50000
+        readTimeout: 50000
+ribbon:
+  ReadTimeout: 60000
+  SocketTimeout: 60000
+
+#接口文档
+knife4j:
+  enableAggregation: true
+  nacos:
+    routes:
+      - name: 认证中心
+        serviceName: carbon-auth
+        location: /authCenter/v2/api-docs?group=default
+        servicePath: /
+      - name: 系统服务
+        serviceName: carbon-system
+        location: /system/v2/api-docs?group=default
+        servicePath: /
+      - name: 资产服务
+        serviceName: carbon-assets
+        location: /assets/v2/api-docs?group=default
+        servicePath: /
+      - name: 交易服务
+        serviceName: carbon-trade
+        location: /trade/v2/api-docs?group=default
+        servicePath: /
