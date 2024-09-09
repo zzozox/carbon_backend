@@ -31,13 +31,13 @@
         ce.name carbonExchangeName,
         ce.website carbonExchangeWebsite,
         cmp.project_introduction,
-        cml.name carbonMethodologyName,
         cml.certification_criteria,
         cmr.project_name,
         cmr.project_scope_code,
         cmr.project_industry_code,
         cmr.project_scope_type_code,
-        cmr.project_scope_type
+        cmr.project_scope_type,
+        cmr.methodology_name carbonMethodologyName
         from carbon_credit_assets cca
         left join carbon_exchange ce on ce.id = cca.carbon_exchange_id
         left join carbon_metaregistry_project cmp on cmp.id = cca.carbon_project_id
@@ -51,22 +51,25 @@
 
         ce.name carbonExchangeName,
         cmp.project_introduction,
-        cml.name carbonMethodologyName,
+        cml.name carbonMethodology,
         cml.certification_criteria,
         cmr.project_status_code,
         cmr.project_name,
         cmr.project_scope_code,
         cmr.project_industry_code,
         cmr.project_scope_type_code,
-        cmr.project_scope_type
+        cmr.project_scope_type,
+        cmr.certified_standard certificationCriteria,
+        cmr.issuing_date issuingDate,
+        cmr.methodology_name carbonMethodologyName
         from carbon_credit_assets cca
         left join carbon_exchange ce on ce.id = cca.carbon_exchange_id
-        left join carbon_metaregistry_project cmp on cmp.metaregistry_id = cca.carbon_project_id
-        left join carbon_metaregistry cmr on cmr.id = cmp.metaregistry_id
+        left join carbon_metaregistry_project cmp on cmp.id = cca.carbon_project_id
+        left join carbon_metaregistry cmr on cmr.id = cca.carbon_project_id
         left join carbon_methodology cml on cml.dict_code = cmr.methodology_code
 
         <where>
-            <!--cmr.project_status_code='0100000013'-->
+            cmr.project_status_code='0100000013'
             <if test="param.projectName != null and param.projectName !='' ">
                 and cmr.project_name like CONCAT('%',#{param.projectName},'%')
             </if>
@@ -98,11 +101,11 @@
 
     </select>
     <select id="getCarbonAssetsTotal" resultType="com.carbon.assets.vo.CarbonAssetsTotalVo">
-        select sum(cca.total) total,
-               sum(cca.available_amount) availableAmount,
-               sum(cca.frozen_amount) frozenAmount,
-               sum(cca.locked_amount) lockedAmount
-        from carbon_credit_assets cca
+        select cca.total total,
+        cca.available_amount availableAmount,
+        cca.frozen_amount frozenAmount,
+        cca.locked_amount lockedAmount
+        from carbon_credit_assets cca ORDER BY cca.created_time desc LIMIT 1
     </select>
 
 </mapper>

@@ -43,7 +43,7 @@ public class CarbonProjectListVo implements Serializable{
     @ApiModelProperty(value = "项目地点")
     private String address;
 
-//    @Dict(dictCode = "009")
+    //    @Dict(dictCode = "009")
     @ApiModelProperty(value = "碳减排方法学字典编码")
     private String carbonMethodology;
 
@@ -90,4 +90,39 @@ public class CarbonProjectListVo implements Serializable{
 
     @ApiModelProperty(value = "项目设计文档")
     private String designDocument;
+
+    @ApiModelProperty(value = "指标code")
+    private String indexCode;
+
+    @ApiModelProperty(value = "开发负责人姓名")
+    private String principalName;
+
+    @ApiModelProperty(value = "开发负责人电话")
+    private String principalPhone;
+
+    @ApiModelProperty(value = "开发机构")
+    private String assetsDevelopAgency;
+
+    @ApiModelProperty(value = "国家")
+    @Dict(dictCode = "006")
+    private String country;
+
+    @ApiModelProperty(value = "省份")
+    @Dict(dictCode = "011")
+    private String province;
+
+    @ApiModelProperty(value = "城市")
+    @Dict(dictCode = "012")
+    private String city;
+
+    @ApiModelProperty(value = "开发跟进人")
+    private String developmentFollower;
+
+    @ApiModelProperty(value = "项目信息")
+    private String projectMsg;
+
+    @ApiModelProperty(value = "备注")
+    private String remarks;
+
+    private List parameterValueList;
 }

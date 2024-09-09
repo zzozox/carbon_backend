@@ -10,7 +10,9 @@
         updated_time,
         id, name, status, status_code, type_code, method_code, dict_code, certification_criteria, source_file_url, cdm_code, translate_version, filing_batch, field_code, field_child_code, industry_code
     </sql>
-
+    <select id="getByCode" resultType="com.carbon.assets.vo.CarbonMethodologyQueryVo">
+        select <include refid="Base_Column_List"/> from carbon_methodology where method_code = #{code}
+    </select>
     <select id="getCarbonMethodologyById" resultType="com.carbon.assets.vo.CarbonMethodologyQueryVo">
         select <include refid="Base_Column_List"/> from carbon_methodology where id = #{id}
     </select>

@@ -16,7 +16,11 @@ spring:
     nacos:
       discovery:
         server-addr: http://www.mycarbon.com:8848
-
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+      enabled: true
 
 #接口文档
 knife4j:

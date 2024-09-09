@@ -53,6 +53,9 @@ public class CarbonTradeQuoteQueryVo implements Serializable{
     @ApiModelProperty(value = "项目类型（字典：004）")
     private String projectType;
 
+    @ApiModelProperty(value = "项目类型（字典：004）")
+    private String projectTypeName;
+
     @Dict(dictCode = "014")
     @ApiModelProperty(value = "资产类型（字典：014）")
     private String assetType;

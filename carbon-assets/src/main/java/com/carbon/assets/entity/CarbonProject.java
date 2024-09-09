@@ -110,4 +110,13 @@ public class CarbonProject extends BaseEntity {
     @ApiModelProperty(value = "备案号")
     private String refId;
 
+    @ApiModelProperty(value = "开发跟进人")
+    private String developmentFollower;
+
+    @ApiModelProperty(value = "项目信息")
+    private String projectMsg;
+
+    @ApiModelProperty(value = "备注")
+    private String remarks;
+
 }

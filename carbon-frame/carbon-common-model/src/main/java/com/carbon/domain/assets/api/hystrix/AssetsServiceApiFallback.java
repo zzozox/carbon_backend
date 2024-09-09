@@ -2,6 +2,7 @@ package com.carbon.domain.assets.api.hystrix;
 
 import com.carbon.domain.assets.api.AssetsServiceApi;
 import com.carbon.domain.assets.vo.CarbonExchangeQueryVo;
+import com.carbon.domain.assets.vo.MethodologyUploadParam;
 import com.carbon.domain.common.ApiResult;
 
 import com.carbon.domain.mq.entity.CarbonProjectAddParam;
@@ -36,6 +37,13 @@ public class AssetsServiceApiFallback implements FallbackFactory<AssetsServiceAp
 			public ApiResult addFeishuProject(CarbonProjectAddParam param) {
 				return result;
 			}
+
+			@Override
+			public ApiResult uploadContent(MethodologyUploadParam param) {
+				return null;
+			}
+
+
 		};
 	}
 }

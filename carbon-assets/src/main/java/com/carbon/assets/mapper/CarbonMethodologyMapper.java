@@ -53,4 +53,5 @@ public interface CarbonMethodologyMapper extends BaseMapper<CarbonMethodology> {
     List<CarbonMethodologySelectVo> getCarbonMethodologyList();
 
     CarbonMethodology getCarbonMethodologyByName(String name);
+    CarbonMethodologyQueryVo getByCode(@Param("code") String Code);
 }

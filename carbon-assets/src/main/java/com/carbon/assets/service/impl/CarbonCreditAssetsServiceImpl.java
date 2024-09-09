@@ -44,6 +44,8 @@ import javax.annotation.Resource;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -122,6 +124,8 @@ public class CarbonCreditAssetsServiceImpl extends BaseServiceImpl<CarbonCreditA
         Page<?> page = getPage(param);
         page.addOrder(OrderItem.desc("cca.updated_time"));
         IPage<CarbonCreditAssetsQueryVo> iPage = carbonCreditAssetsMapper.getCarbonCreditAssetsPageList(page,param);
+        List<CarbonCreditAssetsQueryVo> records = iPage.getRecords();
+        ArrayList<CarbonCreditAssetsQueryVo> creditAssetsQueryVos = new ArrayList<>();
         return new Paging<>(iPage);
     }
 
@@ -148,6 +152,7 @@ public class CarbonCreditAssetsServiceImpl extends BaseServiceImpl<CarbonCreditA
         carbonCreditAssets.setTransactionStatus(AssetsTradeStatus.OFFER.getStatus());
         carbonCreditAssets.setAvailableAmount(carbonCreditAssets.getTotal());
         carbonCreditAssets.setValuation(carbonCreditAssets.getTotal().multiply(BigDecimal.valueOf(50)));
+        carbonCreditAssets.setCertifiedAgency(cm.getCertifiedStandard());
         this.save(carbonCreditAssets);
 
         SecurityData data = getLoginInfoVo().getSecurityData();

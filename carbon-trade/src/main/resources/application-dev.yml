@@ -57,3 +57,6 @@ logging:
 #      address: r-uf6f430a98d6db74.redis.rds.aliyuncs.com
 #      password: ALi415523
 #      database: 0
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

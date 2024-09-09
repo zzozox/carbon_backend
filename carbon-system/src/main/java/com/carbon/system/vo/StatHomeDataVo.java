@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * <p>
@@ -53,7 +54,6 @@ public class StatHomeDataVo implements Serializable{
     private StatCarbonProjectVo projectStat;
 
     @ApiModelProperty(value = "碳交易行情")
-    private StatCarbonQuotationVo quotation;
-
+    private List<StatCarbonQuotationVo> quotation;
 
 }

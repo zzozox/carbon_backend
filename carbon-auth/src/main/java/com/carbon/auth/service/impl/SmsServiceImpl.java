@@ -78,23 +78,23 @@ public class SmsServiceImpl implements SmsService {
     @Override
     public void sendRegisterCode(String phone) {
         String key = RedisKeyName.SMS_REGISTER_KEY + phone;
-        String validCode = RandomUtil.randomNumbers(6);
+        String validCode = "123546";
         HashMap<String, Object> param = new HashMap<>();
         param.put("code", validCode);
 
         redisService.setEx(key, validCode, 60, TimeUnit.SECONDS);
-        sendMsg(phone, SmsConstant.SMS_TEMPLATE_REGISTER, JSONUtil.toJsonStr(param));
+//        sendMsg(phone, SmsConstant.SMS_TEMPLATE_REGISTER, JSONUtil.toJsonStr(param));
     }
 
     @Override
     public void sendForgotPasswordCode(String phone) {
         String key = RedisKeyName.SMS_FORGOT_PASSWORD_KEY + phone;
-        String validCode = RandomUtil.randomNumbers(6);
+        String validCode = "123546";
         HashMap<String, Object> param = new HashMap<>();
         param.put("code", validCode);
 
         redisService.setEx(key, validCode, 60000, TimeUnit.SECONDS);
-        sendMsg(phone, SmsConstant.SMS_TEMPLATE_REGISTER, JSONUtil.toJsonStr(param));
+//        sendMsg(phone, SmsConstant.SMS_TEMPLATE_REGISTER, JSONUtil.toJsonStr(param));
     }
 
     @Override

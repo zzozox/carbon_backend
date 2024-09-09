@@ -36,6 +36,9 @@ public class CarbonCreditAssetsQueryVo implements Serializable{
     @ApiModelProperty(value = "项目说明")
     private String projectIntroduction;
 
+    @ApiModelProperty(value = "方法学字典编码")
+    private String carbonMethodology;
+
     @ApiModelProperty(value = "方法学名称")
     private String carbonMethodologyName;
 
@@ -47,6 +50,7 @@ public class CarbonCreditAssetsQueryVo implements Serializable{
     private String projectScopeCode;
 
     @ApiModelProperty(value = "项目类型编码")
+    @Dict(dictCode = "004")
     private String projectScopeTypeCode;
 
     @ApiModelProperty(value = "项目类型")
@@ -66,7 +70,7 @@ public class CarbonCreditAssetsQueryVo implements Serializable{
     @ApiModelProperty(value = "交易所官网")
     private String carbonExchangeWebsite="--";
 
-    @Dict(dictCode = "036")
+    @Dict(dictCode = "052")
     @ApiModelProperty(value = "核证机构")
     private String certifiedAgency;
 

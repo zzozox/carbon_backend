@@ -2,6 +2,7 @@ package com.carbon.domain.assets.api;
 
 import com.carbon.domain.assets.api.hystrix.AssetsServiceApiFallback;
 import com.carbon.domain.assets.vo.CarbonExchangeQueryVo;
+import com.carbon.domain.assets.vo.MethodologyUploadParam;
 import com.carbon.domain.common.ApiResult;
 
 
@@ -35,4 +36,8 @@ public interface AssetsServiceApi {
 
 	@PostMapping("/carbonProject/addFeishuProject")
 	ApiResult addFeishuProject(@RequestBody(required = false) CarbonProjectAddParam param);
+
+	@PostMapping("/methodoloySyn/synContent")
+	ApiResult uploadContent(@RequestBody MethodologyUploadParam param);
 }
+

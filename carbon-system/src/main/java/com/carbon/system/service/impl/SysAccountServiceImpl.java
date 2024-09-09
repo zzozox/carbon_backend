@@ -308,7 +308,7 @@ public class SysAccountServiceImpl extends BaseServiceImpl<SysAccountMapper, Sys
         String value = RandomUtil.randomString(6);
         redisService.setEx(key,value,10,TimeUnit.MINUTES);
         String text="点击以下链接完成邮箱验证\n" +
-                "http://122.112.151.24:9091/system/sysAccount/renew/email/"+param.getId().toString()+"/"+param.getEmail()+"/"+value;
+                "http://120.46.147.103:9091/system/sysAccount/renew/email/"+param.getId().toString()+"/"+param.getEmail()+"/"+value;
         mailService.simple(param.getEmail(),"【碳信使】邮箱验证",text);
     }
 

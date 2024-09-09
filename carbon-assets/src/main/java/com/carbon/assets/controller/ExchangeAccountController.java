@@ -123,7 +123,7 @@ public class ExchangeAccountController extends BaseController {
 
         String originalFilename = file.getOriginalFilename();
         ApiResult apiResult = FeiShuAPI.uploadFile(file, originalFilename);
-
+        System.out.println(apiResult);
         JsonObject jsonObject = (JsonObject) new JsonParser().parse(apiResult.getData().toString());
 
         String url = "https://carbonmsger.feishu.cn/file/" + jsonObject.get("file_token").getAsString();

@@ -93,4 +93,6 @@ public class RocketMqName {
      */
     public static final String WECHAT_MEMBER_ORDER_MSG = "WECHAT_MEMBER_ORDER_MSG";
 
+    public static final String SYN_METHOD_CONTENT_MSG = "SYN_METHOD_CONTENT_MSG";
+
 }

@@ -37,4 +37,7 @@ public class MethodologyUploadParam extends QueryParam {
     @ApiModelProperty(value = "飞书word路径")
     private String wordUrl="";
 
+    @ApiModelProperty(value = "方法学字典编码")
+    private String dictCode;
+
 }

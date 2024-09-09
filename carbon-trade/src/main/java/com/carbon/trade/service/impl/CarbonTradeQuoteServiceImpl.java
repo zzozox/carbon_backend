@@ -88,7 +88,7 @@ public class CarbonTradeQuoteServiceImpl extends BaseServiceImpl<CarbonTradeQuot
             {
                 return;
             }
-            tradeQuote.setProjectType(map.getProjectScopeTypeCode());
+            tradeQuote.setProjectType("00".concat(map.getProjectScopeTypeCode()));//数据转换丢位 添加两个0
             tradeQuote.setProjectScope(map.getProjectScope());
             tradeQuote.setProjectScopeCode(map.getProjectScopeCode());
             log.info("{}",JSONUtil.toJsonStr(map));

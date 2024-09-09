@@ -4,6 +4,7 @@ import com.carbon.domain.assets.vo.MethodologyUploadParam;
 import com.carbon.assets.repository.MethodologyRepository;
 import com.carbon.assets.service.CarbonMethodologyService;
 import com.carbon.assets.param.CarbonMethodologyQueryParam;
+import com.carbon.assets.service.SynMethodologyContentService;
 import com.carbon.assets.vo.CarbonMethodologyQueryVo;
 import com.carbon.assets.entity.CarbonMethodology;
 import com.carbon.assets.common.BaseController;
@@ -15,6 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -41,7 +43,8 @@ public class CarbonMethodologyController extends BaseController {
     @Autowired
     private MethodologyRepository methodologyRepository;
 
-
+    @Autowired
+    private SynMethodologyContentService synMethodologyContentService;
 
     /**
      * 添加碳减排方法学
@@ -58,9 +61,22 @@ public class CarbonMethodologyController extends BaseController {
      */
     @PostMapping("/upload")
     @ApiOperation(value = "添加碳减排方法学",notes = "添加碳减排方法学")
-    public ApiResult<Boolean> addCarbonMethodology(@Valid @RequestBody MethodologyUploadParam param) {
+    public ApiResult addCarbonMethodology(@Valid @RequestBody MethodologyUploadParam param) {
+        CarbonMethodology query = carbonMethodologyService.lambdaQuery()
+                .select(CarbonMethodology.class,i->i.getProperty().equals("created_time")||i.getProperty().equals("updated_time"))
+                .eq(CarbonMethodology::getDictCode,param.getDictCode())
+                .one();
+        if(query!=null)
+        {
+            return ApiResult.fail("字典编码已存在");
+        }
+        try {
+            carbonMethodologyService.addCarbonMethodology(param);
+        }catch (DataIntegrityViolationException e)
+        {
+            return ApiResult.fail("请先添加对应的字段编码");
+        }
 
-        carbonMethodologyService.addCarbonMethodology(param);
 
         return ApiResult.ok();
     }

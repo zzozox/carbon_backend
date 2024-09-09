@@ -1,13 +1,13 @@
 package com.carbon.assets.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.carbon.assets.entity.CarbonMethodology;
 import com.carbon.assets.mapper.CarbonMethodologyMapper;
 import com.carbon.domain.assets.vo.MethodologyUploadParam;
 import com.carbon.assets.service.CarbonMethodologyService;
 import com.carbon.assets.param.CarbonMethodologyQueryParam;
-import com.carbon.assets.util.EsUtil;
 import com.carbon.assets.vo.CarbonMethodologyQueryVo;
 import com.carbon.assets.vo.CarbonMethodologySelectVo;
 import com.carbon.common.service.BaseServiceImpl;
@@ -73,28 +73,19 @@ public class CarbonMethodologyServiceImpl extends BaseServiceImpl<CarbonMethodol
         carbonMethodology.setCreatorId(getCurrentAccountId());
         carbonMethodology.setCreatedTime(LocalDate.now());
         carbonMethodology.setUpdatedTime(LocalDate.now());
+        carbonMethodology.setDictCode(param.getDictCode());
         save(carbonMethodology);
 
         //发送mq消息同步方法学内容
-//        if (param.getWordUrl()!=""&&param.getWordUrl()!=null)
-//        {
-//            Message<MethodologyUploadParam> msg= MessageBuilder.withPayload(param).build();
-//            mqTemplate.syncSend(RocketMqName.SYN_METHOD_CONTENT_MSG,msg,3000, RocketDelayLevelConstant.SECOND5);
-//        }
+        if (param.getWordUrl()!=""&&param.getWordUrl()!=null)
+        {
+            Message<MethodologyUploadParam> msg= MessageBuilder.withPayload(param).build();
+            mqTemplate.syncSend(RocketMqName.SYN_METHOD_CONTENT_MSG,msg,3000, RocketDelayLevelConstant.SECOND5);
+        }
     }
 
     @Override
     public boolean updateCarbonMethodology(CarbonMethodology carbonMethodology) {
-        String json="{\n" +
-                "    \"doc\":{\n" +
-                "        \"statusCode\": \""+carbonMethodology.getStatusCode()+"\"\n" +
-                "    }\n" +
-                "}";
-        try {
-            EsUtil.UpdateMethod(json,carbonMethodology.getId().intValue());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return updateById(carbonMethodology);
     }
 

@@ -18,7 +18,8 @@
 
     <select id="getCarbonTradeQuotePageList" resultType="com.carbon.trade.vo.CarbonTradeQuoteQueryVo">
         select <include refid="Base_Column_List"/>,
-        st.tenant_name publisherName
+        st.tenant_name publisherName,
+        sd1.item_ch as projectTypeName
         from carbon_trade_quote ctq
         left join sys_tenant st on st.id = ctq.publisher_id
         left join sys_dict_item sd1 on sd1.dict_code = '004' and sd1.item_value = ctq.project_type
@@ -58,14 +59,14 @@
 
 
     <select id="getCarbonMetaregistryByCarbonMetaregistryProjectId" parameterType="long" resultType="com.carbon.trade.vo.MetaregistryDataVo">
-        select
+        select DISTINCT
             cmr.project_scope,
             cmr.project_scope_code,
             cmr.project_scope_type,
             cmr.project_scope_type_code
         from carbon_metaregistry cmr
         LEFT JOIN  carbon_metaregistry_project cmp ON cmr.id = cmp.metaregistry_id
-        where cmp.id = #{id}
+        where cmr.id = #{id}
     </select>
 
 </mapper>

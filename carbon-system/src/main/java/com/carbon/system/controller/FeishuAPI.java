@@ -146,7 +146,7 @@ public class FeishuAPI {
     @ApiOperation(value = "审批监听事件", notes = "审批监听事件")
     public ApiResult testUpdateFile(@RequestBody FeiShuEventParam1 param) {
         log.info("审批监听事件:{}", JSONUtil.toJsonPrettyStr(param));
-//        carbonApprovalService.approvalEventCallback(param);
+        carbonApprovalService.approvalEventCallback(param);
 
         return ApiResult.ok();
     }

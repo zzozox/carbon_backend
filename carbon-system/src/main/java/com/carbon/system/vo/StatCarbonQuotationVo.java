@@ -50,5 +50,8 @@ public class StatCarbonQuotationVo implements Serializable{
     @ApiModelProperty(value = "项目")
     private List<StatCarbonQuotationProjectVo> projects;
 
+    @ApiModelProperty(value = "类型")
+    private String type;
+
 
 }

@@ -15,7 +15,7 @@ chain_client:
   nodes:
     - # 节点地址，格式为：IP:端口:连接数
       #node_addr: "127.0.0.1:12301"
-      node_addr: "192.168.3.213:12305"
+      node_addr: "192.168.3.158:12305"
       # 节点连接数
       conn_cnt: 10
       # RPC连接是否启用双向TLS认证
@@ -28,7 +28,7 @@ chain_client:
       tls_host_name: "chainmaker.org"
     - # 节点地址，格式为：IP:端口:连接数
       #node_addr: "127.0.0.1:12302"
-      node_addr: "192.168.3.213:12306"
+      node_addr: "192.168.3.158:12306"
       # 节点连接数
       conn_cnt: 10
       # RPC连接是否启用双向TLS认证

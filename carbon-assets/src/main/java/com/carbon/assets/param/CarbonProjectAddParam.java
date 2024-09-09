@@ -85,4 +85,13 @@ public class CarbonProjectAddParam implements Serializable {
 
     @ApiModelProperty(value = "附件列表")
     private List<CarbonProjectOwnerDataAnnex> annexList;
+
+    @ApiModelProperty(value = "开发跟进人")
+    private String developmentFollower;
+
+    @ApiModelProperty(value = "项目信息")
+    private String projectMsg;
+
+    @ApiModelProperty(value = "备注")
+    private String remarks;
 }

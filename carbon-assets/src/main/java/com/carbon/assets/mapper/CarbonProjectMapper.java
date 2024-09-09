@@ -68,4 +68,6 @@ public interface CarbonProjectMapper extends BaseMapper<CarbonProject> {
     CarbonProjectContent getCarbonProjectByName(String name);
 
     Long getIdByMethodologyId(Long id);
+
+    IPage<CarbonProjectListVo> getNoWaitExaminePageList(Page<?> page, CarbonProjectQueryParam queryParam);
 }

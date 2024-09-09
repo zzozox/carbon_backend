@@ -2,6 +2,8 @@
 server:
   port: 9091
 #spring配置
+  tomcat:
+    max-http-form-post-size: 50MB
 spring:
   #1.应用配置
   profiles:
